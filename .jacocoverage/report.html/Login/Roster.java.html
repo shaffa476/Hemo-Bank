@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Roster.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Online_Blood_Donation_Project_403&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Login</a> &gt; <span class="el_source">Roster.java</span></div><h1>Roster.java</h1><pre class="source lang-java linenums">package Login;
+import java.util.*;
+import java.util.regex.Pattern;
+import java.util.ArrayList;
+public class Roster {
+    /**
+     *This class has following data members.
+     */
+    private LinkedList&lt;Register&gt; user_DonorList; 
+    
+<span class="fc" id="L11">     ArrayList&lt;String&gt; list_details = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L12">     ArrayList&lt;String&gt; user_list_blood_bag_details = new ArrayList&lt;String&gt;();</span>
+    
+    private int size;
+
+     public Roster() 
+<span class="fc" id="L17">   {</span>
+        
+        
+<span class="fc" id="L20">        user_DonorList= new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L21">        size=0;</span>
+    
+           
+<span class="fc" id="L24">    } </span>
+    
+<span class="nc" id="L26">    public int listSize() {return size;}</span>
+    
+   
+    /* Search donor by ID -- change it to blood Group search*/
+    public int searchUser(int Id) 
+    {
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        for(int i=0;i&lt;size;i++) </span>
+        {
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">            if(user_DonorList.get(i).getId()==Id) </span>
+            {
+<span class="fc" id="L36">                return i;</span>
+            }
+        }
+<span class="nc" id="L39">        return -1 ;</span>
+        
+    } 
+    
+     private int searchDonor(int Id) 
+    {
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for(int i=0;i&lt;size;i++) </span>
+        {
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            if(user_DonorList.get(i).getId()==Id) </span>
+            {
+<span class="fc" id="L49">                return i;</span>
+            }
+        }
+<span class="fc" id="L52">        return -1 ;</span>
+    }
+     
+    public boolean addUser(Register r) 
+    {
+<span class="fc" id="L57">        int id = r.getId();</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if(searchDonor(id) != -1) {</span>
+<span class="nc" id="L59">            System.out.println(&quot;User already exists.&quot;);</span>
+<span class="nc" id="L60">            return false;</span>
+        }
+      
+   // end method validateLastName
+<span class="fc" id="L64">        String email= r.getEmailId();</span>
+<span class="fc" id="L65">        boolean b1 = Pattern.matches(&quot;\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b&quot; , email); </span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if(b1 == false){</span>
+<span class="fc" id="L67">            System.out.println(&quot;Invalid Email ! please try valid email syntax only .&quot;);</span>
+<span class="fc" id="L68">            return false;</span>
+        }
+        
+<span class="fc" id="L71">        String fname= r.getFirstName();</span>
+<span class="fc" id="L72">        boolean b2 = Pattern.matches(&quot;[a-zA-z]+([ '-][a-zA-Z]+)*&quot; , fname); </span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if(b2 == false){</span>
+<span class="nc" id="L74">             System.out.println(&quot;Invalid Name !please try alphabets only .&quot;);</span>
+<span class="nc" id="L75">             return false;</span>
+             
+        }
+        
+<span class="fc" id="L79">        String lname= r.getLastName();</span>
+<span class="fc" id="L80">        boolean b3 = Pattern.matches(&quot;[a-zA-z]+([ '-][a-zA-Z]+)*&quot; , lname); </span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if(b3 == false){</span>
+<span class="nc" id="L82">          System.out.println(&quot;Invalid Name !please try alphabets only .&quot;);</span>
+<span class="nc" id="L83">          return false;</span>
+        }
+        
+<span class="fc" id="L86">        String userName=  r.getUserName();</span>
+<span class="fc" id="L87">        boolean b4 = Pattern.matches(&quot;^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$&quot; , userName); </span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if(b4 == false) {</span>
+<span class="fc" id="L89">         System.out.println(&quot;Invalid Username !please try atleast 6 digits .&quot;);</span>
+<span class="fc" id="L90">         return false;</span>
+        }
+        
+<span class="fc" id="L93">        String password=  r.getPassword();</span>
+<span class="fc" id="L94">        boolean b5 = Pattern.matches(&quot;^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$&quot; , password); </span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        if(b5 == false) {</span>
+<span class="fc" id="L96">         System.out.println(&quot;Invalid Password ! please try atleast 6 digits .&quot;);</span>
+<span class="fc" id="L97">         return false;</span>
+        }
+        
+<span class="fc" id="L100">        user_DonorList.add(r);</span>
+<span class="fc" id="L101">        size++;</span>
+<span class="fc" id="L102">        return true;</span>
+    }
+    public boolean addDonor(Donor d , int Id)
+    {
+<span class="fc" id="L106">        int index=searchDonor(Id);</span>
+        
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        if(index==-1) </span>
+        {
+<span class="nc" id="L110">            System.out.println(&quot;User doesn't exist.&quot;);</span>
+<span class="nc" id="L111">            return false;</span>
+        }
+        
+<span class="fc" id="L114">        Register user = user_DonorList.get(index);</span>
+       
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        for(int i=0;i&lt;user.getDonors_registered().size();i++) {</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">            if(user.getDonors_registered().get(i).getId()==(d.getId())) </span>
+            {
+<span class="nc" id="L119">                System.out.println(&quot;Donor already exists.&quot;);</span>
+<span class="nc" id="L120">                return false;</span>
+            }
+            
+        }
+        
+<span class="fc bfc" id="L125" title="All 4 branches covered.">        if((d.getAge() &lt; 18 ) || (!(d.getMedical_condition().equalsIgnoreCase(&quot;Healthy&quot;)))) </span>
+             {    
+<span class="fc" id="L127">                   System.out.println(&quot; Not Suitable for Blood Donation  &quot;);</span>
+<span class="fc" id="L128">                   return false;</span>
+             }
+        
+<span class="fc" id="L131">           String bloodtype= d.getBlood_group();</span>
+<span class="fc" id="L132">           boolean b7 = Pattern.matches(&quot;^(A|B|AB|0)(\\+|-)$&quot; , bloodtype); </span>
+            
+<span class="fc bfc" id="L134" title="All 2 branches covered.">            if(b7 == false) {</span>
+<span class="fc" id="L135">               System.out.println(&quot;Invalid Blood Group&quot;);</span>
+<span class="fc" id="L136">               return false;</span>
+           }
+<span class="fc" id="L138">        user_DonorList.get(index).getDonors_registered().add(d);</span>
+<span class="fc" id="L139">        System.out.println(&quot;Donor added successfully.&quot;);</span>
+<span class="fc" id="L140">        return true;</span>
+  }
+  
+   
+    public boolean deleteDonor(Donor d,int Id) 
+    {
+<span class="fc" id="L146">        int index=searchDonor(Id);</span>
+<span class="fc" id="L147">        boolean found = false;</span>
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">        if(index==-1) </span>
+        {
+<span class="nc" id="L150">            System.out.println(&quot;User doesn't exist.&quot;);</span>
+<span class="nc" id="L151">            return false;</span>
+        }
+        
+<span class="fc" id="L154">         Register user = user_DonorList.get(index);</span>
+       
+<span class="pc bfc" id="L156" title="All 2 branches covered.">        for(int i=0;i&lt;user.getDonors_registered().size();i++) {</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">            if(user.getDonors_registered().get(i).getId()==(d.getId())) </span>
+            {
+<span class="fc" id="L159">                found = true;</span>
+<span class="fc" id="L160">                user_DonorList.get(index).getDonors_registered().remove(i);</span>
+<span class="fc" id="L161">                System.out.println(&quot;Donor Deleted Successfully&quot;);</span>
+<span class="fc" id="L162">                return true;</span>
+            }
+            
+        }
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">      if(!found)</span>
+      {  
+<span class="fc" id="L168">         System.out.println(&quot;Donor ID&quot;+ d.getId()+&quot;\n&quot;+&quot;index&quot;+index);</span>
+<span class="fc" id="L169">        System.out.println(&quot;Donor doesn't exist.&quot;);</span>
+<span class="fc" id="L170">        return false;</span>
+      }
+<span class="nc" id="L172">      return true;</span>
+    }
+    
+    
+    public boolean add_blood_bag_info(Donor D , int Id , bloodbag B){ 
+        
+<span class="fc" id="L178">        int index=searchDonor(Id);</span>
+<span class="fc bfc" id="L179" title="All 2 branches covered.">        if(index==-1)</span>
+        {
+<span class="fc" id="L181">            System.out.println(&quot;User doesn't exist.&quot;);</span>
+<span class="fc" id="L182">            return false;</span>
+        }
+        else
+        {
+           
+<span class="fc" id="L187">           list_details.add(String.valueOf(D.getId()));</span>
+<span class="fc" id="L188">            String bloodtype= D.getBlood_group();</span>
+<span class="fc" id="L189">            boolean b6 = Pattern.matches(&quot;^(A|B|AB|0)(\\+|-)$&quot; , bloodtype); </span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">            if(b6 == false) {</span>
+<span class="fc" id="L191">               System.out.println(&quot;Invalid Blood Group&quot;);</span>
+<span class="fc" id="L192">               return false;</span>
+           }
+<span class="fc" id="L194">           list_details.add(D.getBlood_group());</span>
+<span class="fc" id="L195">           list_details.add(B.getCDate());</span>
+<span class="fc" id="L196">           list_details.add(B.getExpDate());  </span>
+         
+        }
+       
+<span class="fc" id="L200">        System.out.println(list_details);  // Will invoke overrided `toString()` method</span>
+
+<span class="fc" id="L202">        return true;</span>
+     
+    }
+
+    
+   
+}
+    
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

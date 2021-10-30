@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>main_call.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Online_Blood_Donation_Project_403&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Login</a> &gt; <span class="el_source">main_call.java</span></div><h1>main_call.java</h1><pre class="source lang-java linenums">package Login;
+import java.util.*;
+
+<span class="nc" id="L4">public class main_call {</span>
+   public static void main (String [] args) {
+<span class="nc" id="L6">        Scanner kb=new Scanner(System.in);</span>
+<span class="nc" id="L7">        Roster R =new Roster();</span>
+<span class="nc" id="L8">        Register u = null;</span>
+<span class="nc" id="L9">        Donor    d = null;</span>
+        while(true) {
+<span class="nc" id="L11">            System.out.println(&quot;Enter A to Add User&quot;);</span>
+<span class="nc" id="L12">            System.out.println(&quot;Enter C to Add Donor&quot;);</span>
+<span class="nc" id="L13">            System.out.println(&quot;Enter D to Delete Donor&quot;);</span>
+<span class="nc" id="L14">            System.out.println(&quot;Enter F to Exit&quot;);</span>
+<span class="nc" id="L15">            System.out.println(&quot;Enter P to Print Donor Details&quot;);</span>
+<span class="nc" id="L16">            System.out.println(&quot;Enter B to View Blood Bags&quot;);</span>
+            
+<span class="nc" id="L18">            String code = kb.next().toUpperCase();</span>
+<span class="nc" id="L19">            char c = code.charAt(0);</span>
+            
+<span class="nc bnc" id="L21" title="All 7 branches missed.">            switch(c){</span>
+                case 'A' :
+<span class="nc" id="L23">                    System.out.println(&quot;Enter  ID: &quot;);</span>
+<span class="nc" id="L24">                    int id =kb.nextInt();</span>
+<span class="nc" id="L25">                    System.out.println(&quot;Enter  First Name:&quot;);</span>
+<span class="nc" id="L26">                    String FN =kb.next();</span>
+<span class="nc" id="L27">                    System.out.println(&quot;Enter  Last Name: &quot;);</span>
+<span class="nc" id="L28">                    String LN =kb.next();</span>
+<span class="nc" id="L29">                    System.out.println(&quot;Enter username: &quot;);</span>
+<span class="nc" id="L30">                    String UN =kb.next();</span>
+                 
+<span class="nc" id="L32">                    System.out.println(&quot;Enter password: &quot;);</span>
+<span class="nc" id="L33">                    String PS=kb.next();</span>
+                    
+<span class="nc" id="L35">                    System.out.println(&quot;Enter EMAIL: &quot;);</span>
+<span class="nc" id="L36">                    String E=kb.next();</span>
+                    
+<span class="nc" id="L38">                    System.out.println(&quot;Enter Phone: &quot;);</span>
+<span class="nc" id="L39">                    Long T= kb.nextLong();</span>
+                    
+<span class="nc" id="L41">                    u = new Register(id,FN,LN,UN,PS,E,T);</span>
+                    
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                    if(R.addUser(u))</span>
+                    
+<span class="nc" id="L45">                      System.out.println(&quot;User added successfully&quot;);</span>
+                    else
+<span class="nc" id="L47">                        System.out.println(&quot;Error. User couldn't be added.&quot;);</span>
+<span class="nc" id="L48">                    break;</span>
+                case 'C':
+<span class="nc" id="L50">                    System.out.println(&quot;Enter Donor ID; -- user id&quot;);</span>
+<span class="nc" id="L51">                    int ID2=kb.nextInt();</span>
+<span class="nc" id="L52">                    System.out.println(&quot;Enter Age; &quot;);</span>
+<span class="nc" id="L53">                    int a = kb.nextInt();</span>
+<span class="nc" id="L54">                    System.out.println(&quot;Enter weight; &quot;);</span>
+<span class="nc" id="L55">                    int w = kb.nextInt();</span>
+<span class="nc" id="L56">                    System.out.println(&quot;Enter medical record; &quot;);</span>
+<span class="nc" id="L57">                     String mr=kb.next();</span>
+<span class="nc" id="L58">                    System.out.println(&quot;Enter blood_group; &quot;);</span>
+<span class="nc" id="L59">                    String bg=kb.next();</span>
+<span class="nc" id="L60">                    d=new Donor(ID2,a,w,mr,bg);// </span>
+<span class="nc" id="L61">                    R.addDonor(d, ID2);</span>
+<span class="nc" id="L62">                    break;</span>
+                 case 'D':
+<span class="nc" id="L64">                    System.out.println(&quot;Enter Donor ID; -- user id&quot;);</span>
+<span class="nc" id="L65">                    int ID3=kb.nextInt();</span>
+<span class="nc" id="L66">                    Donor D=new Donor(ID3);</span>
+<span class="nc" id="L67">                    R.deleteDonor(D, ID3);</span>
+<span class="nc" id="L68">                    break;</span>
+              case 'F':
+<span class="nc" id="L70">                    System.exit(0);</span>
+<span class="nc" id="L71">                    break;</span>
+                case 'P':
+<span class="nc" id="L73">                    u.printDonor_Details();</span>
+<span class="nc" id="L74">                    break;</span>
+                case 'B':
+<span class="nc" id="L76">                    System.out.println(&quot;Enter User ID -- BagID&quot;);</span>
+<span class="nc" id="L77">                    int id4 = kb.nextInt();</span>
+<span class="nc" id="L78">                    System.out.println(&quot;Enter Expiry&quot;);</span>
+<span class="nc" id="L79">                    String exp = kb.next();</span>
+<span class="nc" id="L80">                    System.out.println(&quot;Enter Collected On&quot;);</span>
+<span class="nc" id="L81">                    String col = kb.next();</span>
+<span class="nc" id="L82">                    System.out.println(&quot;Blood Bag Information:&quot;);</span>
+                    
+<span class="nc" id="L84">                    bloodbag b1= new bloodbag(id4,exp,col);</span>
+                    
+<span class="nc" id="L86">                    R.add_blood_bag_info(d , id4 , b1);</span>
+                    
+                    
+<span class="nc" id="L89">                    break;</span>
+                default:
+<span class="nc" id="L91">                    System.out.println(&quot;Invalid code.&quot;);</span>
+        }
+<span class="nc" id="L93">  }</span>
+
+}
+   
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
